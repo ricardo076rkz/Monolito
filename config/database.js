@@ -27,4 +27,5 @@ export default {
     port: process.env.DB_PORT,
     dialect: 'pgsql'
   }
+  
 }

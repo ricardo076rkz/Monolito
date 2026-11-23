@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-br">
 
@@ -7,10 +8,65 @@
     <%- include("includes/navbar"); %>
 
     <div class="container">
+        <%- include("includes/alerts"); %>
+
         <h1>Usuários</h1>
+
+        <form action="/usuarios/salvar" method="POST">
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input type="text" name="nome" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Senha</label>
+                <input type="password" name="senha" class="form-control"
+                       minlength="8" required>
+            </div>
+
+            <button class="btn btn-primary" type="submit">
+                Cadastrar Usuário
+            </button>
+        </form>
+
+        <hr>
+
+        <h2>Usuários cadastrados</h2>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% usuarios.forEach(usuario => { %>
+                    <tr>
+                        <td><%= usuario.nome %></td>
+                        <td><%= usuario.email %></td>
+                        <td>
+                            <form action="/usuarios/<%= usuario.id %>/excluir"
+                                  method="POST" class="d-inline">
+                                <button class="btn btn-sm btn-outline-danger"
+                                        onclick="return confirm('Excluir usuário?')">
+                                    Excluir
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </div>
 
     <%- include("includes/footer"); %>
 </body>
-
 </html>
