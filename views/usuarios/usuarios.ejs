@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include("includes/headers"); %>
+
+<body>
+    <%- include("includes/navbar"); %>
+
+    <div class="container">
+        <%- include("includes/alerts"); %>
+
+        <h1>Usuários</h1>
+
+        <a class="btn btn-primary" href="/usuarios/novo" role="button">Novo Usuário</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Data e Hora</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (usuarios.length === 0) { %>
+                    <tr>
+                        <td colspan="4" class="text-center">Nenhum usuário cadastrado.</td>
+                    </tr>
+                <% } %>
+                <% usuarios.forEach(usuario => { %>
+                    <tr>
+                        <td><%= usuario.nome %></td>
+                        <td><%= usuario.email %></td>
+                        <td><%= usuario.createdAt.toLocaleString() %></td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="/usuarios/<%= usuario.id %>/edit" role="button">Editar</a>
+                            <form action="/usuarios/<%= usuario.id %>/excluir" method="POST" class="d-inline"
+                                onsubmit="return confirm('Deseja realmente excluir este usuário?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include("includes/footer"); %>
+</body>
+
+</html>

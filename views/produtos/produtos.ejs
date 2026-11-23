@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include("includes/headers"); %>
+
+<body>
+    <%- include("includes/navbar"); %>
+
+    <div class="container">
+        <%- include("includes/alerts"); %>
+
+        <h1>Produtos</h1>
+
+        <a class="btn btn-primary" href="/produtos/novo" role="button">Novo Produto</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Referência</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Estoque</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (produtos.length === 0) { %>
+                    <tr>
+                        <td colspan="5" class="text-center">Nenhum produto cadastrado.</td>
+                    </tr>
+                <% } %>
+                <% produtos.forEach(produto => { %>
+                    <tr>
+                        <td><%= produto.referencia %></td>
+                        <td><%= produto.descricao %></td>
+                        <td>R$ <%= Number(produto.preco).toFixed(2) %></td>
+                        <td><%= produto.estoque %></td>
+                        <td>
+                            <a class="btn btn-sm btn-outline-primary" href="/produtos/<%= produto.id %>/edit" role="button">Editar</a>
+                            <form action="/produtos/<%= produto.id %>/excluir" method="POST" class="d-inline"
+                                onsubmit="return confirm('Deseja realmente excluir este produto?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+    <%- include("includes/footer"); %>
+</body>
+
+</html>

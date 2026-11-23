@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include("includes/headers"); %>
+
+<body>
+    <%- include("includes/navbar"); %>
+
+    <div class="container">
+        <%- include("includes/alerts"); %>
+
+        <h1>Novo Produto</h1>
+
+        <form action="/produtos/salvar" method="POST">
+            <div class="mb-3">
+                <label for="referencia" class="form-label">Referência</label>
+                <input type="text" class="form-control" id="referencia" name="referencia" maxlength="100" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="preco" class="form-label">Preço</label>
+                <input type="number" class="form-control" id="preco" name="preco" min="0" step="0.01" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="estoque" class="form-label">Estoque</label>
+                <input type="number" class="form-control" id="estoque" name="estoque" min="0" step="1" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="/produtos" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <%- include("includes/footer"); %>
+</body>
+
+</html>

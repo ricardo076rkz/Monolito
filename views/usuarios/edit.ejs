@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-br">
+
+<%- include("includes/headers"); %>
+
+<body>
+    <%- include("includes/navbar"); %>
+
+    <div class="container">
+        <%- include("includes/alerts"); %>
+
+        <h1>Editar Usuário <%= usuario.id %></h1>
+
+        <form action="/usuarios/atualizar" method="POST">
+            <input type="hidden" name="id" value="<%= usuario.id %>">
+
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" maxlength="100" value="<%= usuario.nome %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" maxlength="200" value="<%= usuario.email %>" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="senha" class="form-label">Nova senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" minlength="8">
+                <div class="form-text">Deixe em branco para manter a senha atual.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Atualizar</button>
+            <a href="/usuarios" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+
+    <%- include("includes/footer"); %>
+</body>
+
+</html>
