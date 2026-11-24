@@ -21,8 +21,12 @@ if (process.env.DB_CONNECTION == 'sqlite') {
 async function createDatabase(sequelize) {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true }); // Isso irá criar as tabelas e alterar caso necessário
-    console.log('Banco de dados criado com sucesso!');
+
+    // Cria tabelas que ainda não existem, sem tentar alterar colunas existentes.
+    // Isso evita o erro de coluna duplicada no SQLite causado por alter: true.
+    await sequelize.sync();
+
+    console.log('Banco de dados conectado e sincronizado com sucesso!');
   } catch (error) {
     console.error('Erro ao criar o banco de dados:', error);
   } finally {
