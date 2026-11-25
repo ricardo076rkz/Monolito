@@ -1,3 +1,4 @@
+
 import { Sequelize } from 'sequelize';
 import config from '../config/database.js';
 
@@ -22,15 +23,14 @@ async function createDatabase(sequelize) {
   try {
     await sequelize.authenticate();
 
-    // Cria tabelas que ainda não existem, sem tentar alterar colunas existentes.
-    // Isso evita o erro de coluna duplicada no SQLite causado por alter: true.
+    // Cria tabelas que ainda não existem, sem alterar as existentes.
     await sequelize.sync();
 
     console.log('Banco de dados conectado e sincronizado com sucesso!');
   } catch (error) {
     console.error('Erro ao criar o banco de dados:', error);
   } finally {
-    // sequelize.close(); // Encerra a conexão com o banco de dados
+    // sequelize.close();
   }
 }
 

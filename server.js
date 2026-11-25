@@ -4,6 +4,7 @@ import session from 'express-session';
 import flash from 'connect-flash';
 import web from './routes/web.js';
 import api from './routes/api.js';
+import cors from 'cors';
 
 const app = express();
 
@@ -37,7 +38,10 @@ app.use(function(req, res, next) {
 });
 
 app.use(web);
-app.use('/api', api);
+
+app.use('/api', cors({
+    origin: 'http://localhost:5173'
+}), api);
 
 import { sequelize, createDatabase } from './core/sequelize.js';
 createDatabase(sequelize);
